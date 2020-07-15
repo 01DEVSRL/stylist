@@ -11,7 +11,8 @@ class ThemeHtmlBuilderTest extends TestCase
 
     public function init()
     {
-        $this->builder = new ThemeHtmlBuilder($this->app['html'], $this->app['url']);;
+        $this->builder = new ThemeHtmlBuilder($this->app['html'], $this->app['url']);
+        ;
 
         StylistFacade::registerPath(__DIR__.'/../Stubs/Themes/Parent');
         StylistFacade::activate('Parent theme');
@@ -21,28 +22,28 @@ class ThemeHtmlBuilderTest extends TestCase
     {
         $script = $this->builder->script('script.js');
 
-        $this->assertContains('/themes/parent-theme/script.js', (string) $script);
+        $this->assertStringContainsString('/themes/parent-theme/script.js', (string) $script);
     }
 
     public function testStyleUrlCreation()
     {
         $style = $this->builder->script('css/app.css');
 
-        $this->assertContains('/themes/parent-theme/css/app.css', (string) $style);
+        $this->assertStringContainsString('/themes/parent-theme/css/app.css', (string) $style);
     }
 
     public function testImageUrlCreation()
     {
         $image = $this->builder->image('images/my-image.png');
 
-        $this->assertContains('/themes/parent-theme/images/my-image.png', (string) $image);
+        $this->assertStringContainsString('/themes/parent-theme/images/my-image.png', (string) $image);
     }
 
     public function testHtmlLinkAssetCreation()
     {
         $flashLink = $this->builder->linkAsset('swf/video.swf');
 
-        $this->assertContains('/themes/parent-theme/swf/video.swf', (string) $flashLink);
+        $this->assertStringContainsString('/themes/parent-theme/swf/video.swf', (string) $flashLink);
     }
 
     public function testAssetUrlResponse()
